@@ -94,7 +94,7 @@ WheelCollider:
   m_Radius: 1.66
   m_SuspensionSpring:
     spring: 0
-    damper: 0
+    damper: 1000
     targetPosition: 0
   m_SuspensionDistance: 0
   m_ForceAppPointDistance: 1.87
