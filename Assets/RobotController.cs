@@ -3,22 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RobotController : MonoBehaviour {
-   //  JointMotor[] wheels; //0-1 left  2-3 right
-    //  [SerializeField] HingeJoint[] joints; //0-1 left  2-3 right
-    //[SerializeField] Rigidbody[] rbs;
+ 
     [SerializeField] WheelCollider[] wheels;
     [SerializeField] float force = 20;
-
-    //Vector3 forceVector = Vector3.one;
-    private void Start() {
-        //print(joints.Length);
-       /* wheels = new JointMotor[joints.Length];
-        for(int i = 0; i < joints.Length; i++) {
-            wheels[i] = joints[i].motor;
-            //print(wheels[i]);
-        }*/
-        
-    }
 
     void Update() {
         EditorHotkeys();
