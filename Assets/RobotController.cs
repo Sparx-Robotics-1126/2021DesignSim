@@ -43,24 +43,32 @@ public class RobotController : MonoBehaviour {
             WheelForce(true, -force);
 
         }
+        else
+        {
+            WheelForce(true, 0);
+        }
 
         if (Input.GetKey(KeyCode.E)) {
             WheelForce(false, force);
         } else if (Input.GetKey(KeyCode.D)){
             WheelForce(false, -force);
         }
+        else
+        {
+            WheelForce(false, 0);
+        }
     }
 
     void WheelForce(bool left, float amount) {
         if(left) {
              // print(wheels[1] + " force");
-              wheels[0].motorTorque = amount;
-              wheels[1].motorTorque = amount;
+              wheels[0].motorTorque = amount * Time.deltaTime;
+              wheels[1].motorTorque = amount * Time.deltaTime;
             //rbs[0].AddForce(rbs[0].transform.right * amount * Time.deltaTime);
         } else {
            //  print(wheels[3] + " force");
-             wheels[2].motorTorque = amount;
-             wheels[3].motorTorque = amount;
+             wheels[2].motorTorque = amount * Time.deltaTime;
+             wheels[3].motorTorque = amount * Time.deltaTime;
             //rbs[1].AddForce(rbs[1].transform.right * amount * Time.deltaTime);
         }
     }
