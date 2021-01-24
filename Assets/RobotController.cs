@@ -7,11 +7,9 @@ public class RobotController : MonoBehaviour {
     [SerializeField] WheelCollider[] wheels;
     [SerializeField] float force = 20;
 
-    void Update() {
+    void Update() { 
         EditorHotkeys();
         RobotControls();
-
-
     }
 
     void EditorHotkeys() {
@@ -58,6 +56,7 @@ public class RobotController : MonoBehaviour {
              wheels[3].motorTorque = amount * Time.deltaTime;
             //rbs[1].AddForce(rbs[1].transform.right * amount * Time.deltaTime);
         }
+        print("hi");
     }
 
     void DebugLines() {
