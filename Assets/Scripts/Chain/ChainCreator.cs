@@ -2,28 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChainCreator : MonoBehaviour {
-    public GameObject firstLink;
-    public GameObject LastLink;
-
+[ExecuteInEditMode]
+public class ChainCreator : MonoBehaviour  {
     [SerializeField] int length;
-    [SerializeField] GameObject chain;
+    [SerializeField] ChainLink chain;
+    [SerializeField] ChainParent chainParentPrefab;
     [SerializeField] Rigidbody moveBody;
-    [SerializeField] FixedJoint attatchedBody;
     [SerializeField] float chainDistance = 0.12f;
 
     int i;
-
-    private void Awake() {
+    Transform chainParent;
+    int namingInt = 1;
+    public void CreateChain() {
         i = length - 1;
-        GameObject obj =  Instantiate(chain, transform.position, transform.rotation, transform);
-        obj.transform.name = "chain link + " + (length - i);
+
+        chainParent = Instantiate(chainParentPrefab, transform.position, Quaternion.identity).transform;
+        chainParent.name = "Chain Parent " + namingInt;
+        namingInt++;
+
+        GameObject obj =  Instantiate(chain, transform.position, transform.rotation, chainParent).gameObject;
+        obj.transform.name = "chain link " + (length - i);
         obj.GetComponent<CharacterJoint>().connectedBody = moveBody;
-        firstLink = obj;
         CreateLink(obj.transform);
+
+        chainParent.GetComponent<ChainParent>().SetUp();
     }
     private void CreateLink(Transform previous) {
         i--;
+
         Quaternion newRot = Quaternion.identity;
         newRot.eulerAngles = previous.eulerAngles + new Vector3(90, 0, 0);
         Vector3 newPos = previous.position + new Vector3(chainDistance, 0, 0);
@@ -33,10 +39,6 @@ public class ChainCreator : MonoBehaviour {
 
         if (i > 0) {
             CreateLink(temp.transform);
-        } else {
-            LastLink = temp;
-          //  attatchedBody.connectedBody = temp.GetComponent<Rigidbody>();
-           // attatchedBody.transform.position = temp.transform.position + new Vector3(chainDistance * 2, 0, 0);
-        }
+        } 
     }
 }
