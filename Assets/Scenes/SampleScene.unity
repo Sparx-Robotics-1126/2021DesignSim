@@ -433,7 +433,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1077718143}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.345, y: 0.476, z: 3.884}
+  m_LocalPosition: {x: 0.345, y: 0.476, z: 6.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -451,9 +451,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a92ebe6deb1e84d83bffb8f8e670b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  length: 100
+  length: 10
   chain: {fileID: 6117410120035026861, guid: 0f498bf66e211124f8627effd2fca9ce, type: 3}
   chainParentPrefab: {fileID: 7108699965296129938, guid: e5832c5f2a3a5194ca2b1b5affe3ea34, type: 3}
+  parentName: Chain Parent
   moveBody: {fileID: 1839697807}
   chainDistance: 0.13
 --- !u!1 &1130855446
