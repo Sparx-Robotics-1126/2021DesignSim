@@ -37,7 +37,8 @@ public class ChainCreator : MonoBehaviour  {
 
         GameObject obj =  Instantiate(chain, transform.position, transform.rotation, chainParent).gameObject;
         obj.transform.name = "chain link " + (length - i);
-        obj.GetComponent<CharacterJoint>().connectedBody = moveBody;
+        if(moveBody != null) obj.GetComponent<CharacterJoint>().connectedBody = moveBody;
+
         CreateLink(obj.transform);
 
         chainParent.GetComponent<ChainParent>().SetUp();
