@@ -12,9 +12,5 @@ public class ChainCreatorEditor : Editor {
         if(GUILayout.Button("Create Chain")) {
             creator.CreateChain();
         }
-
-        if(GUILayout.Button("Reset Name")) {
-            creator.ResetName();
-        }
     }
 }
