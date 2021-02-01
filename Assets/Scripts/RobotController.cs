@@ -53,8 +53,10 @@ public class RobotController : MonoBehaviour {
               wheels[1].motorTorque = amount * Time.deltaTime;
             //rbs[0].AddForce(rbs[0].transform.right * amount * Time.deltaTime);
         } else {
-           //  print(wheels[3] + " force");
-             wheels[2].motorTorque = amount * Time.deltaTime;
+            print("right force " + amount);
+
+            //  print(wheels[3] + " force");
+            wheels[2].motorTorque = amount * Time.deltaTime;
              wheels[3].motorTorque = amount * Time.deltaTime;
             //rbs[1].AddForce(rbs[1].transform.right * amount * Time.deltaTime);
         }
