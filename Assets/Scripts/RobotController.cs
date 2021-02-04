@@ -47,7 +47,7 @@ public class RobotController : MonoBehaviour {
         //if(newRot.y != 0)  newRot *= Input.GetAxisRaw("Vertical");//to make backing up and turning more intuitive
         
         transform.eulerAngles += newRot;
-        print(Input.GetAxisRaw("Vertical"));
+        //print(Input.GetAxisRaw("Vertical"));
     }
 
     void DebugLines() {
