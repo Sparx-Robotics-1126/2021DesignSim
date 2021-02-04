@@ -1701,6 +1701,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wheel (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6502874603311761635, guid: 74e8c6dda4893574696c27eb8e96c26c, type: 3}
+      propertyPath: m_SuspensionSpring.damper
+      value: 4500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6502874603311761635, guid: 74e8c6dda4893574696c27eb8e96c26c, type: 3}
+      propertyPath: m_SuspensionSpring.spring
+      value: 35000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6502874603311761635, guid: 74e8c6dda4893574696c27eb8e96c26c, type: 3}
+      propertyPath: m_ForwardFriction.m_ExtremumSlip
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6502874603311761635, guid: 74e8c6dda4893574696c27eb8e96c26c, type: 3}
+      propertyPath: m_SuspensionSpring.targetPosition
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7253196669399491093, guid: 74e8c6dda4893574696c27eb8e96c26c, type: 3}
       propertyPath: m_ConnectedBody
       value: 
