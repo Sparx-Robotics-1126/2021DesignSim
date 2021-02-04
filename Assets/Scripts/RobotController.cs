@@ -5,6 +5,7 @@ using UnityEngine;
 public class RobotController : MonoBehaviour {
  
     [SerializeField] WheelCollider[] wheels;
+    [SerializeField] float rotation = 45;
     [SerializeField] float force = 20;
 
     void Update() {
@@ -24,42 +25,29 @@ public class RobotController : MonoBehaviour {
     
     void RobotControls() {
 
-        if(Input.GetKey(KeyCode.Q)) {
-            WheelForce(true, force);
-        } else if(Input.GetKey(KeyCode.A)) {
-            WheelForce(true, -force);
-
-        }
-        else
-        {
-            WheelForce(true, 0);
+        if(Input.GetKey(KeyCode.W)) {
+            WheelForce( force);
+        } else if(Input.GetKey(KeyCode.S)) {
+            WheelForce( -force);
+        } else {
+            WheelForce( 0);
         }
 
-        if (Input.GetKey(KeyCode.E)) {
-            WheelForce(false, force);
-        } else if (Input.GetKey(KeyCode.D)){
-            WheelForce(false, -force);
-        }
-        else
-        {
-            WheelForce(false, 0);
+        Rotate();
+    }
+
+    void WheelForce(float amount) {
+         foreach(WheelCollider wheel in wheels) {
+             wheel.motorTorque = amount * Time.deltaTime;
         }
     }
 
-    void WheelForce(bool left, float amount) {
-        if(left) {
-             // print(wheels[1] + " force");
-              wheels[0].motorTorque = amount * Time.deltaTime;
-              wheels[1].motorTorque = amount * Time.deltaTime;
-            //rbs[0].AddForce(rbs[0].transform.right * amount * Time.deltaTime);
-        } else {
-            print("right force " + amount);
-
-            //  print(wheels[3] + " force");
-            wheels[2].motorTorque = amount * Time.deltaTime;
-             wheels[3].motorTorque = amount * Time.deltaTime;
-            //rbs[1].AddForce(rbs[1].transform.right * amount * Time.deltaTime);
-        }
+    void Rotate() {
+        Vector3 newRot = new Vector3(0, rotation, 0) * Time.deltaTime * Input.GetAxisRaw("Horizontal");
+        //if(newRot.y != 0)  newRot *= Input.GetAxisRaw("Vertical");//to make backing up and turning more intuitive
+        
+        transform.eulerAngles += newRot;
+        print(Input.GetAxisRaw("Vertical"));
     }
 
     void DebugLines() {
