@@ -6,11 +6,15 @@ public class RobotController : MonoBehaviour {
  
     [SerializeField] WheelCollider[] wheels;
     [SerializeField] float force = 20;
+    [SerializeField] Jointer jointee;
+    Jointer j;
+    Cone c;
+
 
     void Update() {
         EditorHotkeys();
         RobotControls();
-
+        Invoke("setKinematic", .01f);
 
     }
 
@@ -23,7 +27,7 @@ public class RobotController : MonoBehaviour {
     }
     
     void RobotControls() {
-
+        Vector3 pos = jointee.transform.position;
         if(Input.GetKey(KeyCode.Q)) {
             WheelForce(true, force);
         } else if(Input.GetKey(KeyCode.A)) {
@@ -37,8 +41,40 @@ public class RobotController : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.E)) {
             WheelForce(false, force);
-        } else if (Input.GetKey(KeyCode.D)){
+        } else if (Input.GetKey(KeyCode.D)) {
             WheelForce(false, -force);
+        }
+
+        else if (Input.GetKey(KeyCode.R))
+        {
+            if (pos.y <= 2) 
+            {
+                pos.y += .01f;
+                print(pos);
+                jointee.transform.position = pos;
+            }
+        }
+        else if (Input.GetKey(KeyCode.F))
+        {
+            if (pos.y >= 0.1)
+            {
+                pos.y -= .01f;
+                print(pos);
+                jointee.transform.position = pos;
+            }
+        }
+        else if (Input.GetKey(KeyCode.T))
+        {
+            
+            j = GetComponentInChildren<Jointer>();
+            c = j.cone;
+            c.GetComponent<Rigidbody>().isKinematic = false;
+            c.GetComponent<Rigidbody>().useGravity = true;
+            transform.GetComponentInChildren<Cone>().transform.SetParent(null);
+            //The problem going down in town is that it isnt changing is Kinematic to false so the cone isnt falling. The child is trying to be access by its grandparents not just parents
+            j.cone = null;
+            c.transform.parent = null;
+            
         }
         else
         {
@@ -53,7 +89,7 @@ public class RobotController : MonoBehaviour {
               wheels[1].motorTorque = amount * Time.deltaTime;
             //rbs[0].AddForce(rbs[0].transform.right * amount * Time.deltaTime);
         } else {
-            print("right force " + amount);
+//print("right force " + amount);
 
             //  print(wheels[3] + " force");
             wheels[2].motorTorque = amount * Time.deltaTime;
@@ -65,5 +101,17 @@ public class RobotController : MonoBehaviour {
     void DebugLines() {
       //  Debug.DrawRay(rbs[0].transform.position,tr);
         //Debug.DrawRay(rbs[1].transform.position,transform.f);
+    }
+    void setKinematic()
+    {
+        j = GetComponentInChildren<Jointer>();
+        c = j.cone;
+        if (c != null)
+        {
+            if (c.GetComponent<Rigidbody>().velocity == Vector3.zero)
+            {
+                c.GetComponent<Rigidbody>().isKinematic = true;
+            }
+        }
     }
 }
