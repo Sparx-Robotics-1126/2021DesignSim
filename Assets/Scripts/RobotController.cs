@@ -44,15 +44,13 @@ public class RobotController : MonoBehaviour {
                 print(pos);
                 jointee.transform.position = pos;
             }
-        }
-        else if (Input.GetKey(KeyCode.F)) {
+        } else if (Input.GetKey(KeyCode.F)) {
             if (pos.y >= 0.1) {
                 pos.y -= .01f;
                 print(pos);
                 jointee.transform.position = pos;
             }
-        }
-        else if (Input.GetKey(KeyCode.T)) {
+        } else if (Input.GetKey(KeyCode.T)) {
             j = GetComponentInChildren<Jointer>();
             c = j.cone;
             c.GetComponent<Rigidbody>().isKinematic = false;
@@ -75,19 +73,15 @@ public class RobotController : MonoBehaviour {
 
     void Rotate() {
         Vector3 newRot = new Vector3(0, rotation, 0) * Time.deltaTime * Input.GetAxisRaw("Horizontal");
-        
         transform.eulerAngles += newRot;
     }
 
    
-    void setKinematic()
-    {
+    void setKinematic() {
         j = GetComponentInChildren<Jointer>();
         c = j.cone;
-        if (c != null)
-        {
-            if (c.GetComponent<Rigidbody>().velocity == Vector3.zero)
-            {
+        if (c != null) {
+            if (c.GetComponent<Rigidbody>().velocity == Vector3.zero) {
                 c.GetComponent<Rigidbody>().isKinematic = true;
             }
         }
