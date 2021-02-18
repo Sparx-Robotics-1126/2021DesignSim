@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 public class ChainLink : MonoBehaviour
 {
     // Start is called before the first frame update
