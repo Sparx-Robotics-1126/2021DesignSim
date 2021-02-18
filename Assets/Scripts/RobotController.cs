@@ -72,6 +72,7 @@ public class RobotController : MonoBehaviour {
     
 
     void Rotate() {
+        print("rotate");
         Vector3 newRot = new Vector3(0, rotation, 0) * Time.deltaTime * Input.GetAxisRaw("Horizontal");
         transform.eulerAngles += newRot;
     }
