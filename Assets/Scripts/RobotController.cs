@@ -7,11 +7,15 @@ public class RobotController : MonoBehaviour {
     [SerializeField] WheelCollider[] wheels;
     [SerializeField] float rotation = 45;
     [SerializeField] float force = 20;
+    [SerializeField] Jointer jointee;
+    Jointer j;
+    Cone c;
+
 
     void Update() {
         EditorHotkeys();
         RobotControls();
-
+        Invoke("setKinematic", .01f);
 
     }
 
@@ -33,25 +37,59 @@ public class RobotController : MonoBehaviour {
             WheelForce( 0);
         }
 
+        Vector3 pos = jointee.transform.position;
+         if (Input.GetKey(KeyCode.R)) {
+            if (pos.y <= 2) {
+                pos.y += .01f;
+                print(pos);
+                jointee.transform.position = pos;
+            }
+        }
+        else if (Input.GetKey(KeyCode.F)) {
+            if (pos.y >= 0.1) {
+                pos.y -= .01f;
+                print(pos);
+                jointee.transform.position = pos;
+            }
+        }
+        else if (Input.GetKey(KeyCode.T)) {
+            j = GetComponentInChildren<Jointer>();
+            c = j.cone;
+            c.GetComponent<Rigidbody>().isKinematic = false;
+            c.GetComponent<Rigidbody>().useGravity = true;
+            transform.GetComponentInChildren<Cone>().transform.SetParent(null);
+            j.cone = null;
+            c.transform.parent = null;
+        }
+
         Rotate();
     }
 
     void WheelForce(float amount) {
          foreach(WheelCollider wheel in wheels) {
              wheel.motorTorque = amount * Time.deltaTime;
-        }
+         }
     }
+
+    
 
     void Rotate() {
         Vector3 newRot = new Vector3(0, rotation, 0) * Time.deltaTime * Input.GetAxisRaw("Horizontal");
-        //if(newRot.y != 0)  newRot *= Input.GetAxisRaw("Vertical");//to make backing up and turning more intuitive
         
         transform.eulerAngles += newRot;
-        //print(Input.GetAxisRaw("Vertical"));
     }
 
-    void DebugLines() {
-      //  Debug.DrawRay(rbs[0].transform.position,tr);
-        //Debug.DrawRay(rbs[1].transform.position,transform.f);
+   
+    void setKinematic()
+    {
+        j = GetComponentInChildren<Jointer>();
+        c = j.cone;
+        if (c != null)
+        {
+            if (c.GetComponent<Rigidbody>().velocity == Vector3.zero)
+            {
+                c.GetComponent<Rigidbody>().isKinematic = true;
+            }
+        }
     }
 }
