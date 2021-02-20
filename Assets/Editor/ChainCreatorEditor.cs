@@ -11,6 +11,9 @@ public class ChainCreatorEditor : Editor {
         ChainCreator creator = (ChainCreator)target;
         if(GUILayout.Button("Create Chain")) {
             creator.CreateChain();
+        } else if(GUILayout.Button("rename chain parents")) {
+            creator.RenameChains();
         }
+
     }
 }
