@@ -43,13 +43,4 @@ public class ChainCreator : MonoBehaviour  {
             CreateLink(temp.transform);
         } 
     }
-
-    public void RenameChains() {
-        ChainParent[] parents = FindObjectsOfType<ChainParent>();
-        int nameNum = parents.Length;
-        foreach(ChainParent c in parents) {
-            c.transform.name = "Chain Parent " + nameNum;
-            nameNum--;
-        }
-    }
 }
