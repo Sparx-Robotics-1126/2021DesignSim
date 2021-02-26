@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RobotController : MonoBehaviour {
- 
     [SerializeField] WheelCollider[] wheels;
+    [SerializeField] ClimbingDrum climbingDrum;
+    [SerializeField] Jointer jointee;
     [SerializeField] float rotation = 45;
     [SerializeField] float force = 20;
-    [SerializeField] Jointer jointee;
+
     Jointer j;
     Cone c;
-
 
     void Update() {
         EditorHotkeys();
@@ -53,11 +53,20 @@ public class RobotController : MonoBehaviour {
         } else if (Input.GetKey(KeyCode.T)) {
             j = GetComponentInChildren<Jointer>();
             c = j.cone;
-            c.GetComponent<Rigidbody>().isKinematic = false;
-            c.GetComponent<Rigidbody>().useGravity = true;
-            transform.GetComponentInChildren<Cone>().transform.SetParent(null);
-            j.cone = null;
-            c.transform.parent = null;
+            if (c) {
+                c.GetComponent<Rigidbody>().isKinematic = false;
+                c.GetComponent<Rigidbody>().useGravity = true;
+                transform.GetComponentInChildren<Cone>().transform.SetParent(null);
+                j.cone = null;
+                c.transform.parent = null;
+            }
+        } 
+        
+        
+        if(Input.GetKey(KeyCode.Q)) {
+            climbingDrum.spinMotor = true;
+        } else {
+            climbingDrum.spinMotor = false;
         }
 
         Rotate();
@@ -72,7 +81,7 @@ public class RobotController : MonoBehaviour {
     
 
     void Rotate() {
-        print("rotate");
+        //print("rotate");
         Vector3 newRot = new Vector3(0, rotation, 0) * Time.deltaTime * Input.GetAxisRaw("Horizontal");
         transform.eulerAngles += newRot;
     }

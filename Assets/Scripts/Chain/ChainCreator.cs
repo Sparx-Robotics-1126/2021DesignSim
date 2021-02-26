@@ -22,7 +22,8 @@ public class ChainCreator : MonoBehaviour  {
 
         GameObject obj =  Instantiate(chain, transform.position, transform.rotation, chainParent).gameObject;
         obj.transform.name = "chain link " + (length - i);
-        if(moveBody != null) obj.GetComponent<CharacterJoint>().connectedBody = moveBody;
+        //Destroy(obj.GetComponent<CharacterJoint>());
+       // if(moveBody != null) obj.GetComponent<CharacterJoint>().connectedBody = moveBody;
 
         CreateLink(obj.transform);
 
@@ -34,7 +35,7 @@ public class ChainCreator : MonoBehaviour  {
         Quaternion newRot = Quaternion.identity;
         newRot.eulerAngles = previous.eulerAngles + new Vector3(90, 0, 0);
         Vector3 newPos = previous.position + new Vector3(chainDistance, 0, 0);
-        GameObject temp = Instantiate(previous.gameObject,newPos, newRot,previous);
+        GameObject temp = Instantiate(previous.gameObject,newPos, newRot,chainParent);
         temp.transform.name = "chain link " + (length - i);
         temp.GetComponent<CharacterJoint>().connectedBody = previous.GetComponent<Rigidbody>();
 
